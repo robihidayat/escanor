@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
+import 'package:escanor/model/user_principle.dart';
 import 'package:escanor/user_repository.dart';
 import 'package:meta/meta.dart';
 import './bloc.dart';
@@ -20,6 +21,8 @@ AuthenticationBloc({@required UserRepository userRepository})
     AuthenticationEvent event,
   ) async* {
     if(event is AppStart){
+      yield Uninitialized();
+      
       yield* _mapAppStartedToState();
     } else if (event is LoggedIn) {
       yield* _mapLoggedInToState();
@@ -35,7 +38,8 @@ AuthenticationBloc({@required UserRepository userRepository})
     try {
       final isSignedIn = await _userRepository.isSignedIn();
       if (isSignedIn) {
-        yield Authenticated("dummy");
+        final UserPrinciple userPrinciple = await _userRepository.getUser();
+        yield Authenticated(userPrinciple);
       } else {
         yield Unauthenticated();
       }

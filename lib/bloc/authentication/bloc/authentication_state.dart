@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:escanor/model/user_principle.dart';
 import 'package:meta/meta.dart';
 
 @immutable
@@ -14,13 +15,18 @@ class Uninitialized extends AuthenticationState {
   String toString() => 'Uninitialized';
 }
 
-class Authenticated extends AuthenticationState {
-  final String displayName;
+class SplashScrean extends AuthenticationState{
+  @override
+  String toString()=> 'SplashScrean';
+}
 
-  Authenticated(this.displayName) : super([displayName]);
+class Authenticated extends AuthenticationState {
+  final UserPrinciple userPrinciple;
+
+  Authenticated(this.userPrinciple) : super([userPrinciple]);
 
   @override
-  String toString() => 'Authenticated { displayName: $displayName }';
+  String toString() => 'Authenticated { displayName: $userPrinciple }';
 }
 
 class Unauthenticated extends AuthenticationState {

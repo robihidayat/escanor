@@ -8,7 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'bloc/authentication/bloc/authentication_bloc.dart';
 import 'bloc/authentication/bloc/bloc.dart';
-import 'page/home_screen.dart';
+import 'page/landing_page.dart';
 import 'page/login_screan.dart';
 
 class App extends StatelessWidget {
@@ -32,7 +32,7 @@ class App extends StatelessWidget {
             return LoginScreen(userRepository: _userRepository);
           }
           if(state is Authenticated){
-            return HomeScreen(name: state.displayName);
+            return LandingPage(name: state.userPrinciple);
           }
         },
       ),

@@ -1,11 +1,24 @@
 import 'package:escanor/bloc/authentication/bloc/bloc.dart';
+import 'package:escanor/commons/share_preference/user_preference.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class HomeScreen extends StatelessWidget {
-  final String name;
+class HomeScreen extends StatefulWidget {
 
-  HomeScreen({Key key, @required this.name}) : super(key: key);
+  _HomeScreenState createState() => _HomeScreenState();
+  
+}
+
+class _HomeScreenState extends State<HomeScreen>{
+
+  final UserPreference preference = new UserPreference();
+  
+
+  @override
+  void initState() {
+    super.initState();
+    preference.getUserPrinciple();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +39,7 @@ class HomeScreen extends StatelessWidget {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
-          Center(child: Text('Welcome $name!')),
+          Center(child: Text(preference.toString())),
         ],
       ),
     );
