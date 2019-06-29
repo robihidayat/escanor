@@ -12,18 +12,20 @@ class UserPreference{
   ///
   final String _kNotificationsPrefs = "allowNotifications";
   final String _kSortingOrderPrefs = "sortOrder";
-  final String _kUserPrinciple = "userPrinciple";
+  static final String _kUserPrinciple = "userPrinciple";
 
-  Future<bool> setUserPrinciple(UserPrinciple priciple) async {
+  static Future<bool> setUserPrinciple(UserPrinciple priciple) async {
 	  final SharedPreferences prefs = await SharedPreferences.getInstance();
     String jsonUser = jsonEncode(priciple.toJson());
     return prefs.setString(_kUserPrinciple, jsonUser);
   }
 
-  Future<UserPrinciple> getUserPrinciple() async {
+  static Future<UserPrinciple> getUserPrinciple() async {
 	  final SharedPreferences prefs = await SharedPreferences.getInstance();
     var value = prefs.getString(_kUserPrinciple);
-    UserPrinciple userPrinciple = UserPrinciple.fromJson(json.decode(value));
+    final jsonResponse = new Map<String, dynamic>.from(json.decode(value));
+    print("hasil map"+jsonResponse.toString());
+    UserPrinciple userPrinciple = new UserPrinciple.fromJson(jsonResponse);
     return userPrinciple;
   }
 

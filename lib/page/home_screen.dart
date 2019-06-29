@@ -1,7 +1,10 @@
 import 'package:escanor/bloc/authentication/bloc/bloc.dart';
 import 'package:escanor/commons/share_preference/user_preference.dart';
+import 'package:escanor/model/user_principle.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'dart:convert';
+
 
 class HomeScreen extends StatefulWidget {
 
@@ -10,15 +13,16 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen>{
-
-  final UserPreference preference = new UserPreference();
+  final UserPrinciple username = null;
   
 
   @override
   void initState() {
     super.initState();
-    preference.getUserPrinciple();
+    UserPreference.getUserPrinciple();
+
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +43,20 @@ class _HomeScreenState extends State<HomeScreen>{
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
-          Center(child: Text(preference.toString())),
+          Center(
+            child:
+            FutureBuilder(
+              future: UserPreference.getUserPrinciple(), 
+              builder: (context, snapshot){
+              if(snapshot.hasData) {
+
+                print("datanya "+ jsonEncode(snapshot.data.toJson()));
+                return  new Container(child: Text(jsonEncode(snapshot.data.toJson())), );
+                }
+                return  new Container(child: Text('Kosong Isinya'), );
+                }
+              )
+            ), 
         ],
       ),
     );

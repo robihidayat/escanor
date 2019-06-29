@@ -7,14 +7,12 @@ import 'commons/share_preference/user_preference.dart';
 
 class UserRepository {
 
-  final UserPreference _serPreference = new UserPreference();
-
   Future<String> authenticate({
     @required String username,
     @required String password,
   }) async {
     var principle = new UserPrinciple(username, password);
-    _serPreference.setUserPrinciple(principle);
+    await UserPreference.setUserPrinciple(principle);
     await Future.delayed(Duration(seconds: 1));
     return 'token';
   }
@@ -28,7 +26,7 @@ class UserRepository {
   Future<void> signUp({@required String email, @required String password}) async{
     print('coba login '+email);
     var principle = new UserPrinciple(email, password);
-    _serPreference.setUserPrinciple(principle);
+    await UserPreference.setUserPrinciple(principle);
     await Future.delayed(Duration(seconds: 1));
     return;
   }
@@ -52,8 +50,7 @@ class UserRepository {
 
   Future<UserPrinciple> getUser() async {
     await Future.delayed(Duration(seconds: 1));
-     UserPrinciple principle = await  _serPreference.getUserPrinciple();
-    return principle;
+    return await UserPreference.getUserPrinciple();
   }
 
 

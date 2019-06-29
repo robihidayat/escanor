@@ -7,13 +7,13 @@ class UserPrinciple{
 
   UserPrinciple(this.username, this.email);
 
-  UserPrinciple.fromJson(Map<String, dynamic> json)
+  UserPrinciple.fromJson(Map<dynamic, dynamic> json)
       : username = json['username'],
         email = json['email'];
 
-  Map<String, dynamic> toJson() =>
+  Map<dynamic, dynamic> toJson() =>
     {
-      'name': username,
+      'username': username,
       'email': email,
     };
 
