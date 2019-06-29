@@ -1,6 +1,6 @@
 
 class Config {
 
-    static String baseUrlTechinlabs = "http://devtechinlabs-125514040.ap-southeast-1.elb.amazonaws.com/company-api/auth";
+    static String baseUrlTechinlabs = "http://192.168.3.105:8080/company-api/auth";
 
 }

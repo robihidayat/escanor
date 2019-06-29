@@ -13,28 +13,26 @@ import 'commons/share_preference/user_preference.dart';
 class UserRepository {
 
 
-  Future<ResponseAuthentication> createPost({String url, var body}) async {
-    return http.post(Uri.encodeFull(url), headers: {'Accept': 'application/json', 'Content-Type':'application/json'}, body: body, encoding: Encoding.getByName("charset=utf-8")).then((http.Response response) {
+  Future<Map> createPost({String url, var body}) async {
+    return http.post(Uri.encodeFull(url), body: body, headers: {"Content-Type":"application/json"}).then((http.Response response) {
     final int statusCode = response.statusCode;
     print("statusCode "+statusCode.toString());
     
     if (statusCode < 200 || statusCode > 400 || json == null) {
       throw new Exception("Error while fetching data");
     }
-    return ResponseAuthentication.fromJson(json.decode(response.body));
+    return json.decode(response.body);
     });
   }
 
 
   Future<String> authenticate({String email, String password}) async {
     try {
-      print("test http");
-      Map<String, String> body = {	
-        "email": email,
-        "password": password
-      };
-      var response = await createPost(url:Config.baseUrlTechinlabs, body: body);
-      print("get token "+response.token);
+      Map response = await createPost(url:Config.baseUrlTechinlabs, body: jsonEncode({	
+        "email": "robismandax3@gmail.com",
+  "password": "QW!@qw12"
+      }));
+      print("get token "+response.toString());
     } catch (e){
       print("error wtf "+ e.toString());
     }
