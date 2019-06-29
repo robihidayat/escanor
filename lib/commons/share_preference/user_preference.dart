@@ -24,7 +24,6 @@ class UserPreference{
 	  final SharedPreferences prefs = await SharedPreferences.getInstance();
     var value = prefs.getString(_kUserPrinciple);
     final jsonResponse = new Map<String, dynamic>.from(json.decode(value));
-    print("hasil map"+jsonResponse.toString());
     UserPrinciple userPrinciple = new UserPrinciple.fromJson(jsonResponse);
     return userPrinciple;
   }

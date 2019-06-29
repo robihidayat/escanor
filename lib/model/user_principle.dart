@@ -1,6 +1,3 @@
-
-
-
 class UserPrinciple{
    String username;
    String email;

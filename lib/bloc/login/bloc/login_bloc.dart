@@ -76,7 +76,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   }) async* {
     yield LoginState.loading();
     try {
-      await _userRepository.authenticate(username: email, password: password);
+      await _userRepository.authenticate(email: email, password: password);
       yield LoginState.success();
     } catch (_) {
       yield LoginState.failure();
